@@ -10,6 +10,8 @@
  * （`- insert: - id: ds-balance, name: 'dsh-ds-balance'`）。
  */
 
+import { homedir } from "node:os";
+
 /** 稳定 Cordis 插件名。 */
 const name = "ds-balance";
 
@@ -74,7 +76,8 @@ function apply(ctx) {
       const credential = await ctx.credentials.resolve(CREDENTIAL_REF);
       if (credential === undefined) {
         // 提示路径按实际 DSH home 动态拼，避免自定义 DSH_HOME 时误导用户。
-        const homeHint = process.env.DSH_HOME ?? `${process.env.HOME ?? "~"}/.dsh`;
+        // 用 os.homedir() 而非 process.env.HOME，保证 Windows 下也正确。
+        const homeHint = process.env.DSH_HOME ?? `${homedir()}/.dsh`;
         sendJson(res, 503, {
           error: `DEEPSEEK_API_KEY 未配置：请在 ${homeHint}/.credentials.yaml 中设置后刷新`,
         });

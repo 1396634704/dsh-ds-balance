@@ -12,6 +12,8 @@
 
 ## 快速开始（3 步）
 
+**macOS / Linux / Windows（Git Bash 或 WSL）：**
+
 ```bash
 # 1. 获取插件
 git clone https://github.com/1396634704/dsh-ds-balance.git
@@ -25,6 +27,24 @@ cd dsh-ds-balance
 # 3. 重启 dsh web（在运行 dsh web 的终端 Ctrl+C 后重新运行）
 dsh web
 ```
+
+**Windows（PowerShell）：**
+
+```powershell
+# 1. 获取插件
+git clone https://github.com/1396634704/dsh-ds-balance.git
+cd dsh-ds-balance
+
+# 2. 安装到默认位置（%USERPROFILE%\.dsh 的 web profile）
+.\install.ps1
+# 或指定 DSH home 与 profile：
+# .\install.ps1 -DshHome C:\path\.dsh -Profile web
+
+# 3. 重启 dsh web（Ctrl+C 后重新运行 dsh web）
+dsh web
+```
+
+> PowerShell 5.1（Win10/11 自带）或 7+ 均可，无需管理员权限。
 
 刷新浏览器（http://127.0.0.1:3080），侧栏底部即可看到余额面板。
 
@@ -96,7 +116,8 @@ node verify-client.mjs   # 离线验证（Node 模拟加载 + SSR 渲染）
 | `index.js` | host 面：余额查询端点 |
 | `client.js` | browser 面：侧栏余额面板 bundle |
 | `package.json` | 包清单（`exports` 必须含 `./package.json`，DSH 扫描依赖它） |
-| `install.sh` | 一键安装（拷贝 + 幂等登记，跨 macOS / Linux） |
+| `install.sh` | 一键安装（macOS / Linux / Git Bash / WSL，幂等） |
+| `install.ps1` | 一键安装（Windows PowerShell，幂等） |
 | `verify-client.mjs` | 离线验证脚本 |
 
 ## 故障排查
