@@ -90,6 +90,9 @@ if (!bundleText.includes("dsb_uninstall") || !bundleText.includes("/api/deepseek
 for (const marker of ["ALERT_THEME", "dsb_modalMask", "dsb_modalBtnPrimary", "alertThreshold", "data-dsb-alert", "platform.deepseek.com/top_up"]) {
   if (!bundleText.includes(marker)) throw new Error(`余额告警模块回归失败：bundle 缺少 ${marker}`);
 }
+for (const marker of ["testAlert", "closeAlertModal", "结束测试", "告警效果测试"]) {
+  if (!bundleText.includes(marker)) throw new Error(`告警测试按钮回归失败：bundle 缺少 ${marker}`);
+}
 // 四个头部按钮统一 24px/13px 图标样式（用户拍板），防止字号回退不一致。
 for (const btn of [".dsb_link", ".dsb_gear", ".dsb_refresh", ".dsb_close"]) {
   if (!bundleText.includes(`${btn}{width:24px;height:24px;`) || !bundleText.includes("font-size:13px")) {

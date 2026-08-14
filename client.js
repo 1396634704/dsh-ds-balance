@@ -310,8 +310,14 @@ window.__ModuleLoader__.load({
 			const [hoverIndex, setHoverIndex] = react.useState(null);
 			const [uninstallState, setUninstallState] = react.useState("idle");
 			const [alertModalOpen, setAlertModalOpen] = react.useState(false);
+			const [testAlert, setTestAlert] = react.useState(false);
 			const [thresholdDraft, setThresholdDraft] = react.useState(String(loadSettings().alertThreshold));
 			const alertDismissed = react.useRef(false);
+			/** 关闭告警模态；测试态一并复位（红色主题随之恢复）。 */
+			const closeAlertModal = react.useCallback(() => {
+				setAlertModalOpen(false);
+				setTestAlert(false);
+			}, []);
 			const seededRef = react.useRef(false);
 			const inflight = react.useRef(null);
 			const panelRef = react.useRef(null);
@@ -433,7 +439,9 @@ window.__ModuleLoader__.load({
 			// 当前主题与速度档；CSS 变量驱动波浪/呼吸时长（面板与 badge 同属一个 DOM 子树，自动继承）。
 			// 告警激活时整套配色切换为红色告警主题（能量条/圆钮/柱形图全红）。
 			const alertActive = settings.alertEnabled && hasMoney && total <= settings.alertThreshold;
-			const theme = alertActive ? ALERT_THEME : (THEMES[settings.theme] ?? THEMES.ocean);
+			// 测试态：设置面板「测试」按钮强制模拟告警外观（红色主题 + 弹窗），与真实告警取或。
+			const effectiveAlert = alertActive || testAlert;
+			const theme = effectiveAlert ? ALERT_THEME : (THEMES[settings.theme] ?? THEMES.ocean);
 			const speed = SPEEDS[settings.speed] ?? SPEEDS.normal;
 			const cssVars = {
 				"--dsb-waveBack-dur": `${speed.waveBack}s`,
@@ -455,11 +463,11 @@ window.__ModuleLoader__.load({
 			react.useEffect(() => {
 				if (!alertModalOpen) return;
 				const onKey = (event) => {
-					if (event.key === "Escape") setAlertModalOpen(false);
+					if (event.key === "Escape") closeAlertModal();
 				};
 				document.addEventListener("keydown", onKey);
 				return () => document.removeEventListener("keydown", onKey);
-			}, [alertModalOpen]);
+			}, [alertModalOpen, closeAlertModal]);
 			// 设置中的告警线变化时同步输入框草稿。
 			react.useEffect(() => {
 				setThresholdDraft(String(settings.alertThreshold));
@@ -565,10 +573,12 @@ window.__ModuleLoader__.load({
 												"aria-hidden": true,
 												children: renderWaves(theme)
 											}),
-											alertActive && jsxRuntime.jsx("p", {
+											effectiveAlert && jsxRuntime.jsx("p", {
 												className: "dsb_error",
 												role: "alert",
-												children: `⚠️ 余额已低于告警线 ${symbol}${formatMoney(settings.alertThreshold)}，请及时充值`
+												children: testAlert && !alertActive
+													? "⚠️ 告警效果测试中：红色主题与弹窗均为模拟，关闭弹窗后恢复"
+													: `⚠️ 余额已低于告警线 ${symbol}${formatMoney(settings.alertThreshold)}，请及时充值`
 											}),
 											jsxRuntime.jsxs("div", {
 												className: "dsb_chartWrap",
@@ -722,7 +732,18 @@ window.__ModuleLoader__.load({
 																				"data-on": settings.alertEnabled ? void 0 : true,
 																				onClick: () => updateSettings({ alertEnabled: false }),
 																				children: "关闭"
-																			}, "alert-off")
+																			}, "alert-off"),
+																			jsxRuntime.jsx("button", {
+																				type: "button",
+																				className: "dsb_setChip",
+																				"data-on": testAlert || void 0,
+																				title: "模拟一次告警效果（红色主题 + 弹窗）",
+																				onClick: () => {
+																					setTestAlert(true);
+																					setAlertModalOpen(true);
+																				},
+																				children: "测试"
+																			}, "alert-test")
 																		]
 																	}),
 																	jsxRuntime.jsxs("div", {
@@ -791,7 +812,7 @@ window.__ModuleLoader__.load({
 						className: "dsb_badge",
 						"data-dsb-badge": true,
 						"data-dsb-error": state.status === "error" || void 0,
-						"data-dsb-alert": alertActive || void 0,
+						"data-dsb-alert": effectiveAlert || void 0,
 						"data-active": open || void 0,
 						"aria-label": badgeTitle,
 						"aria-expanded": open,
@@ -840,19 +861,24 @@ window.__ModuleLoader__.load({
 						className: "dsb_modalMask",
 						// 点击遮罩空白处关闭；点模态内容不关闭（target===currentTarget 判定）。
 						onMouseDown: (event) => {
-							if (event.target === event.currentTarget) setAlertModalOpen(false);
+							if (event.target === event.currentTarget) closeAlertModal();
 						},
 						children: [
 							jsxRuntime.jsxs("div", {
 								className: "dsb_modal",
 								role: "alertdialog",
 								"aria-modal": true,
-								"aria-label": "余额不足提醒",
+								"aria-label": testAlert && !alertActive ? "余额告警效果测试" : "余额不足提醒",
 								children: [
-									jsxRuntime.jsx("div", { className: "dsb_modalTitle", children: "⚠️ 余额不足提醒" }),
+									jsxRuntime.jsx("div", {
+										className: "dsb_modalTitle",
+										children: testAlert && !alertActive ? "⚠️ 告警效果测试" : "⚠️ 余额不足提醒"
+									}),
 									jsxRuntime.jsx("p", {
 										className: "dsb_modalBody",
-										children: `当前余额 ${symbol}${formatMoney(total)}，已低于你设置的告警线 ${symbol}${formatMoney(settings.alertThreshold)}。请及时充值，避免影响使用。`
+										children: testAlert && !alertActive
+											? "这是告警效果测试：能量条已临时切换为红色告警主题。关闭本弹窗后一切恢复正常。"
+											: `当前余额 ${symbol}${formatMoney(total)}，已低于你设置的告警线 ${symbol}${formatMoney(settings.alertThreshold)}。请及时充值，避免影响使用。`
 									}),
 									jsxRuntime.jsxs("div", {
 										className: "dsb_modalActions",
@@ -860,17 +886,21 @@ window.__ModuleLoader__.load({
 											jsxRuntime.jsx("button", {
 												type: "button",
 												className: "dsb_modalBtn",
-												onClick: () => setAlertModalOpen(false),
+												onClick: () => closeAlertModal(),
 												children: "知道了"
 											}),
 											jsxRuntime.jsx("button", {
 												type: "button",
 												className: "dsb_modalBtn dsb_modalBtnPrimary",
 												onClick: () => {
-													window.open("https://platform.deepseek.com/top_up", "_blank", "noopener");
-													setAlertModalOpen(false);
+													if (testAlert && !alertActive) {
+														closeAlertModal();
+													} else {
+														window.open("https://platform.deepseek.com/top_up", "_blank", "noopener");
+														closeAlertModal();
+													}
 												},
-												children: "去充值"
+												children: testAlert && !alertActive ? "结束测试" : "去充值"
 											})
 										]
 									})
