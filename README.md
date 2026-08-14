@@ -10,6 +10,24 @@
 
 > 说明：DeepSeek 余额接口只返回「当前剩余金额」，没有历史充值 / 消耗数据，因此能量条不做百分比语义，纯作装饰。
 
+## 界面预览
+
+**余额面板**（点击侧栏底部入口展开，含 24 小时用量柱形图）：
+
+<img src="docs/screenshots/02-panel.png" alt="余额面板" width="380">
+
+**设置面板**（点 ⚙：颜色主题 / 动画速度 / 刷新频率 / 余额告警 / 卸载）：
+
+<img src="docs/screenshots/03-settings.png" alt="设置面板" width="380">
+
+**余额告警**（跌破告警线：能量条整套变红 + 屏幕中央弹窗）：
+
+<img src="docs/screenshots/04-alert.png" alt="余额告警" width="720">
+
+**侧栏常驻入口**（收起为胶囊、展开为「总余额 + 波浪能量条」，呼吸动画常驻）：
+
+<img src="docs/screenshots/01-overview.png" alt="侧栏入口" width="720">
+
 ## 快速开始（3 步）
 
 **macOS / Linux / Windows（Git Bash 或 WSL）：**
