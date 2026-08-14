@@ -81,4 +81,13 @@ for (const marker of ["dsb_settings", "dsb_setChip", "dsb_gear", "THEMES", "SPEE
 if (!bundleText.includes("dsb_link") || !bundleText.includes("platform.deepseek.com/usage")) {
   throw new Error("官方后台入口回归失败：bundle 缺少跳转按钮或官方用量页地址");
 }
+if (!bundleText.includes("dsb_tip") || !bundleText.includes("onMouseEnter")) {
+  throw new Error("柱形图悬停数值气泡回归失败");
+}
+// 四个头部按钮统一 24px/13px 图标样式（用户拍板），防止字号回退不一致。
+for (const btn of [".dsb_link", ".dsb_gear", ".dsb_refresh", ".dsb_close"]) {
+  if (!bundleText.includes(`${btn}{width:24px;height:24px;`) || !bundleText.includes("font-size:13px")) {
+    throw new Error(`按钮统一样式回归失败：${btn}`);
+  }
+}
 console.log("client bundle 验证通过");
