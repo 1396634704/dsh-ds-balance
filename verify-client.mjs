@@ -70,4 +70,9 @@ for (const wide of [true, false]) {
   if (!wide && !html.includes("dsb_railAmount")) throw new Error("窄侧栏渲染结果缺少余额金额");
   console.log(`wide=${wide} 渲染 OK（${html.length} 字符）`);
 }
+// 面板仅在 open 状态下渲染（组件内部 state，SSR 无法打开），
+// 小时用量柱形图做文本级回归检查。
+for (const marker of ["dsb_chartWrap", "dsb_chartAxis", "dsb_colFill", "dsb_colEmpty", "recordHour"]) {
+  if (!bundleText.includes(marker)) throw new Error(`柱形图回归失败：bundle 缺少 ${marker}`);
+}
 console.log("client bundle 验证通过");
