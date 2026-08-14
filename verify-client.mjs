@@ -78,4 +78,7 @@ for (const marker of ["dsb_chartWrap", "dsb_chartAxis", "dsb_colFill", "dsb_colE
 for (const marker of ["dsb_settings", "dsb_setChip", "dsb_gear", "THEMES", "SPEEDS", "REFRESH_OPTIONS", "buildDemoHours", "SEED_DEMO_ON_FIRST_RUN"]) {
   if (!bundleText.includes(marker)) throw new Error(`设置面板/演示数据回归失败：bundle 缺少 ${marker}`);
 }
+if (!bundleText.includes("dsb_link") || !bundleText.includes("platform.deepseek.com/usage")) {
+  throw new Error("官方后台入口回归失败：bundle 缺少跳转按钮或官方用量页地址");
+}
 console.log("client bundle 验证通过");
