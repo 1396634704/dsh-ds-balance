@@ -9,7 +9,7 @@ window.__ModuleLoader__.load({
 		//#region 样式：DeepSeek 余额波浪能量条（对齐 DSH 主题变量）
 		// 能量条为纯装饰：双层 SVG 波浪前后交错流动（波面起伏）+ "快吸慢呼"式呼吸，
 		// 外层入口与面板常驻动画，不表达任何比例语义。
-		const css = ".dsb_layer{flex:none;align-items:center;width:100%;margin:8px 0 0;display:flex;position:relative}.dsb_layer.dsb_rail{width:52px;margin:0;justify-content:center}.dsb_badge{box-sizing:border-box;width:100%;color:var(--dsw-alias-label-primary);cursor:pointer;background:0 0;border:none;border-radius:12px;align-items:center;gap:8px;padding:7px 10px 7px 8px;font-family:inherit;font-size:14px;display:flex;overflow:hidden;text-align:left}.dsb_badge:hover{background:var(--dsw-alias-interactive-bg-hover-solid)}.dsb_badge[data-active]{background:var(--dsw-alias-interactive-bg-hover)}.dsb_icon{flex:none;width:24px;height:24px;border-radius:50%;background-size:200% 200%;color:#fff;justify-content:center;align-items:center;font-size:12px;font-weight:700;line-height:1;display:inline-flex;animation:dsb-flow 11s linear infinite,dsb-breathe var(--dsb-breathe-dur,4.2s) ease-in-out infinite}.dsb_rail .dsb_badge{width:52px;height:20px;border-radius:10px;padding:0;position:relative}.dsb_rail .dsb_badge[data-dsb-error]{background:var(--dsw-alias-fill-l2)}.dsb_railWaves{position:absolute;inset:0;overflow:hidden;border-radius:10px}.dsb_railAmount{position:relative;z-index:1;color:#fff;font-size:9px;line-height:20px;font-variant-numeric:tabular-nums;text-shadow:0 0 3px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.4);white-space:nowrap;pointer-events:none}.dsb_rail .dsb_badge[data-dsb-error] .dsb_railAmount{color:var(--dsw-alias-state-error-primary);text-shadow:none}.dsb_main{flex:1;min-width:0;flex-direction:column;gap:5px;display:flex}.dsb_row1{align-items:center;gap:6px;display:flex}.dsb_label{color:var(--dsw-alias-label-primary);font-size:12px;line-height:16px;white-space:nowrap}.dsb_count{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:16px;white-space:nowrap}.dsb_countError{color:var(--dsw-alias-state-error-primary)}.dsb_bar{flex:none;width:100%;height:14px;border-radius:999px;background:var(--dsw-alias-fill-l2);overflow:hidden;position:relative}.dsb_waves{position:absolute;inset:0;animation:dsb-breathe var(--dsb-breathe-dur,4.2s) ease-in-out infinite}.dsb_wave{position:absolute;top:0;left:0;height:100%;width:200%;display:block}.dsb_waveBack{opacity:.42;animation:dsb-wave var(--dsb-waveBack-dur,7s) linear infinite}.dsb_waveFront{opacity:.8;animation:dsb-wave var(--dsb-waveFront-dur,5.2s) linear infinite reverse}.dsb_panel{z-index:30;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-base);width:320px;max-width:calc(100vw - 24px);box-shadow:var(--dsw-shadow-lv2);border-radius:12px;flex-direction:column;display:flex;position:fixed;bottom:76px;left:12px;overflow:hidden}.dsb_header{box-sizing:border-box;border-bottom:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);flex:none;justify-content:space-between;align-items:center;min-height:44px;padding:10px 12px;display:flex;gap:8px}.dsb_title{color:var(--dsw-alias-label-primary);font-size:13px;font-weight:500;line-height:20px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dsb_refresh{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:13px;line-height:1;display:inline-flex;flex:none}.dsb_refresh:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_refresh:disabled{opacity:.4;cursor:default}.dsb_close{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:13px;line-height:1;display:inline-flex;flex:none}.dsb_close:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_body{flex-direction:column;gap:10px;padding:14px 12px 12px;display:flex}.dsb_totalRow{align-items:baseline;gap:8px;display:flex}.dsb_totalLabel{color:var(--dsw-alias-label-tertiary);font-size:13px;line-height:20px;flex:none}.dsb_total{color:var(--dsw-alias-label-primary);font-variant-numeric:tabular-nums;font-size:24px;font-weight:600;line-height:30px}.dsb_barBig{height:14px;flex:none}.dsb_rows{flex-direction:column;gap:2px;margin:0;padding:0;list-style:none;display:flex}.dsb_row{justify-content:space-between;align-items:center;min-height:26px;display:flex}.dsb_rowLabel{color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:18px}.dsb_rowValue{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:18px}.dsb_error{color:var(--dsw-alias-state-error-primary);margin:0;font-size:12px;line-height:18px}.dsb_note{color:var(--dsw-alias-label-tertiary);margin:0;font-size:11px;line-height:16px}@keyframes dsb-wave{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}@keyframes dsb-breathe{0%{opacity:.72}35%{opacity:1}100%{opacity:.72}}@keyframes dsb-flow{0%{background-position:0% 50%}100%{background-position:100% 50%}}@media (prefers-reduced-motion:reduce){.dsb_wave,.dsb_waves,.dsb_icon{animation:none}}.dsb_chartWrap{flex-direction:column;gap:6px;margin-top:4px;display:flex}.dsb_chartHead{justify-content:space-between;align-items:baseline;display:flex}.dsb_chartTitle{color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:18px}.dsb_chartTotal{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:18px}.dsb_chart{align-items:flex-end;gap:3px;height:64px;padding:0 2px;display:flex;position:relative}.dsb_tip{position:absolute;top:-30px;transform:translateX(-50%);background:#1f2328;color:#fff;border-radius:8px;padding:4px 8px;font-size:11px;line-height:16px;display:flex;gap:6px;pointer-events:none;white-space:nowrap;z-index:5;box-shadow:var(--dsw-shadow-lv2)}.dsb_tipTime{opacity:.75}.dsb_col{flex:1;height:100%;justify-content:flex-end;display:flex;min-width:0}.dsb_colFill{width:100%;border-radius:3px 3px 0 0;transition:height .3s ease}.dsb_col[data-hover] .dsb_colFill{filter:brightness(1.15)}.dsb_colEmpty{width:100%;height:2px;border-radius:1px;background:var(--dsw-alias-fill-l2)}.dsb_chartAxis{justify-content:space-between;color:var(--dsw-alias-label-caption);font-size:10px;line-height:14px;display:flex}.dsb_chartNote{color:var(--dsw-alias-label-caption);margin:0;font-size:10px;line-height:14px}.dsb_gear{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:13px;line-height:1;display:inline-flex;flex:none}.dsb_gear:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_gear[data-on]{color:var(--dsw-alias-button-primary-fill,#4d6bfe)}.dsb_link{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:13px;line-height:1;display:inline-flex;flex:none}.dsb_link:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_settings{flex-direction:column;gap:8px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;padding:10px;display:flex}.dsb_setRow{flex-direction:column;gap:4px;display:flex}.dsb_setLabel{color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:16px}.dsb_setChips{flex-wrap:wrap;gap:4px;display:flex}.dsb_setChip{border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary);font:inherit;font-size:11px;line-height:18px;cursor:pointer;background:0 0;border-radius:999px;padding:1px 10px}.dsb_setChip:hover{background:var(--dsw-alias-interactive-bg-hover)}.dsb_setChip[data-on]{border-color:var(--dsw-alias-button-primary-fill,#4d6bfe);color:var(--dsw-alias-button-primary-fill,#4d6bfe);background:var(--dsw-alias-interactive-bg-hover)}.dsb_uninstall{border:1px solid var(--dsw-alias-state-error-primary,#ef4444);color:var(--dsw-alias-state-error-primary,#ef4444);font:inherit;font-size:11px;line-height:18px;cursor:pointer;background:0 0;border-radius:999px;padding:1px 10px;align-self:flex-start}.dsb_uninstall:hover{background:var(--dsw-alias-interactive-bg-hover-danger)}.dsb_uninstall:disabled{opacity:.4;cursor:default}";
+		const css = ".dsb_layer{flex:none;align-items:center;width:100%;margin:8px 0 0;display:flex;position:relative}.dsb_layer.dsb_rail{width:52px;margin:0;justify-content:center}.dsb_badge{box-sizing:border-box;width:100%;color:var(--dsw-alias-label-primary);cursor:pointer;background:0 0;border:none;border-radius:12px;align-items:center;gap:8px;padding:7px 10px 7px 8px;font-family:inherit;font-size:14px;display:flex;overflow:hidden;text-align:left}.dsb_badge:hover{background:var(--dsw-alias-interactive-bg-hover-solid)}.dsb_badge[data-active]{background:var(--dsw-alias-interactive-bg-hover)}.dsb_icon{flex:none;width:24px;height:24px;border-radius:50%;background-size:200% 200%;color:#fff;justify-content:center;align-items:center;font-size:12px;font-weight:700;line-height:1;display:inline-flex;animation:dsb-flow 11s linear infinite,dsb-breathe var(--dsb-breathe-dur,4.2s) ease-in-out infinite}.dsb_rail .dsb_badge{width:52px;height:20px;border-radius:10px;padding:0;position:relative}.dsb_rail .dsb_badge[data-dsb-error]{background:var(--dsw-alias-fill-l2)}.dsb_railWaves{position:absolute;inset:0;overflow:hidden;border-radius:10px}.dsb_railAmount{position:relative;z-index:1;color:#fff;font-size:9px;line-height:20px;font-variant-numeric:tabular-nums;text-shadow:0 0 3px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.4);white-space:nowrap;pointer-events:none}.dsb_rail .dsb_badge[data-dsb-error] .dsb_railAmount{color:var(--dsw-alias-state-error-primary);text-shadow:none}.dsb_main{flex:1;min-width:0;flex-direction:column;gap:5px;display:flex}.dsb_row1{align-items:center;gap:6px;display:flex}.dsb_label{color:var(--dsw-alias-label-primary);font-size:12px;line-height:16px;white-space:nowrap}.dsb_count{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:16px;white-space:nowrap}.dsb_countError{color:var(--dsw-alias-state-error-primary)}.dsb_bar{flex:none;width:100%;height:14px;border-radius:999px;background:var(--dsw-alias-fill-l2);overflow:hidden;position:relative}.dsb_waves{position:absolute;inset:0;animation:dsb-breathe var(--dsb-breathe-dur,4.2s) ease-in-out infinite}.dsb_wave{position:absolute;top:0;left:0;height:100%;width:200%;display:block}.dsb_waveBack{opacity:.42;animation:dsb-wave var(--dsb-waveBack-dur,7s) linear infinite}.dsb_waveFront{opacity:.8;animation:dsb-wave var(--dsb-waveFront-dur,5.2s) linear infinite reverse}.dsb_panel{z-index:30;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-base);width:320px;max-width:calc(100vw - 24px);box-shadow:var(--dsw-shadow-lv2);border-radius:12px;flex-direction:column;display:flex;position:fixed;bottom:76px;left:12px;overflow:hidden}.dsb_header{box-sizing:border-box;border-bottom:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);flex:none;justify-content:space-between;align-items:center;min-height:44px;padding:10px 12px;display:flex;gap:8px}.dsb_title{color:var(--dsw-alias-label-primary);font-size:13px;font-weight:500;line-height:20px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dsb_refresh{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:13px;line-height:1;display:inline-flex;flex:none}.dsb_refresh:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_refresh:disabled{opacity:.4;cursor:default}.dsb_close{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:13px;line-height:1;display:inline-flex;flex:none}.dsb_close:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_body{flex-direction:column;gap:10px;padding:14px 12px 12px;display:flex}.dsb_totalRow{align-items:baseline;gap:8px;display:flex}.dsb_totalLabel{color:var(--dsw-alias-label-tertiary);font-size:13px;line-height:20px;flex:none}.dsb_total{color:var(--dsw-alias-label-primary);font-variant-numeric:tabular-nums;font-size:24px;font-weight:600;line-height:30px}.dsb_barBig{height:14px;flex:none}.dsb_rows{flex-direction:column;gap:2px;margin:0;padding:0;list-style:none;display:flex}.dsb_row{justify-content:space-between;align-items:center;min-height:26px;display:flex}.dsb_rowLabel{color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:18px}.dsb_rowValue{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:18px}.dsb_error{color:var(--dsw-alias-state-error-primary);margin:0;font-size:12px;line-height:18px}.dsb_note{color:var(--dsw-alias-label-tertiary);margin:0;font-size:11px;line-height:16px}@keyframes dsb-wave{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}@keyframes dsb-breathe{0%{opacity:.72}35%{opacity:1}100%{opacity:.72}}@keyframes dsb-flow{0%{background-position:0% 50%}100%{background-position:100% 50%}}@media (prefers-reduced-motion:reduce){.dsb_wave,.dsb_waves,.dsb_icon{animation:none}}.dsb_chartWrap{flex-direction:column;gap:6px;margin-top:4px;display:flex}.dsb_chartHead{justify-content:space-between;align-items:baseline;display:flex}.dsb_chartTitle{color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:18px}.dsb_chartTotal{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:18px}.dsb_chart{align-items:flex-end;gap:3px;height:64px;padding:0 2px;display:flex;position:relative}.dsb_tip{position:absolute;top:-30px;transform:translateX(-50%);background:#1f2328;color:#fff;border-radius:8px;padding:4px 8px;font-size:11px;line-height:16px;display:flex;gap:6px;pointer-events:none;white-space:nowrap;z-index:5;box-shadow:var(--dsw-shadow-lv2)}.dsb_tipTime{opacity:.75}.dsb_col{flex:1;height:100%;justify-content:flex-end;display:flex;min-width:0}.dsb_colFill{width:100%;border-radius:3px 3px 0 0;transition:height .3s ease}.dsb_col[data-hover] .dsb_colFill{filter:brightness(1.15)}.dsb_colEmpty{width:100%;height:2px;border-radius:1px;background:var(--dsw-alias-fill-l2)}.dsb_chartAxis{justify-content:space-between;color:var(--dsw-alias-label-caption);font-size:10px;line-height:14px;display:flex}.dsb_chartNote{color:var(--dsw-alias-label-caption);margin:0;font-size:10px;line-height:14px}.dsb_gear{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:13px;line-height:1;display:inline-flex;flex:none}.dsb_gear:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_gear[data-on]{color:var(--dsw-alias-button-primary-fill,#4d6bfe)}.dsb_link{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:13px;line-height:1;display:inline-flex;flex:none}.dsb_link:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_settings{flex-direction:column;gap:8px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;padding:10px;display:flex}.dsb_setRow{flex-direction:column;gap:4px;display:flex}.dsb_setLabel{color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:16px}.dsb_setChips{flex-wrap:wrap;gap:4px;display:flex}.dsb_setChip{border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary);font:inherit;font-size:11px;line-height:18px;cursor:pointer;background:0 0;border-radius:999px;padding:1px 10px}.dsb_setChip:hover{background:var(--dsw-alias-interactive-bg-hover)}.dsb_setChip[data-on]{border-color:var(--dsw-alias-button-primary-fill,#4d6bfe);color:var(--dsw-alias-button-primary-fill,#4d6bfe);background:var(--dsw-alias-interactive-bg-hover)}.dsb_uninstall{border:1px solid var(--dsw-alias-state-error-primary,#ef4444);color:var(--dsw-alias-state-error-primary,#ef4444);font:inherit;font-size:11px;line-height:18px;cursor:pointer;background:0 0;border-radius:999px;padding:1px 10px;align-self:flex-start}.dsb_uninstall:hover{background:var(--dsw-alias-interactive-bg-hover-danger)}.dsb_uninstall:disabled{opacity:.4;cursor:default}.dsb_badge[data-dsb-alert] .dsb_count{color:var(--dsw-alias-state-error-primary,#ef4444)}.dsb_alertInputRow{align-items:center;gap:6px;color:var(--dsw-alias-label-secondary);font-size:11px;line-height:16px;display:flex}.dsb_input{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);color:var(--dsw-alias-label-primary);font:inherit;font-size:12px;line-height:18px;border-radius:8px;padding:2px 8px;width:80px}.dsb_input:focus{outline:none;border-color:var(--dsw-alias-button-primary-fill,#4d6bfe)}.dsb_modalMask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;justify-content:center;align-items:center;display:flex}.dsb_modal{background:var(--dsw-alias-bg-base,#fff);border:1px solid var(--dsw-alias-border-l1);border-radius:14px;box-shadow:var(--dsw-shadow-lv3);width:320px;max-width:calc(100vw - 48px);flex-direction:column;gap:10px;padding:18px;display:flex}.dsb_modalTitle{color:var(--dsw-alias-state-error-primary,#ef4444);font-size:15px;font-weight:600;line-height:22px}.dsb_modalBody{color:var(--dsw-alias-label-secondary);font-size:13px;line-height:20px;margin:0}.dsb_modalActions{justify-content:flex-end;gap:8px;display:flex}.dsb_modalBtn{border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary);font:inherit;font-size:12px;line-height:20px;cursor:pointer;background:0 0;border-radius:8px;padding:4px 14px}.dsb_modalBtn:hover{background:var(--dsw-alias-interactive-bg-hover)}.dsb_modalBtnPrimary{background:var(--dsw-alias-button-primary-fill,#4d6bfe);border-color:var(--dsw-alias-button-primary-fill,#4d6bfe);color:#fff}.dsb_modalBtnPrimary:hover{opacity:.9;background:var(--dsw-alias-button-primary-fill,#4d6bfe)}";
 		const tagId = "dsh-ds-balance/balance.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId) + "]") === null) {
 			const tag = document.createElement("style");
@@ -82,7 +82,18 @@ window.__ModuleLoader__.load({
 		/** 首次运行且无任何历史记录时，自动播种 24 小时演示数据（便于立刻查看图表效果）。 */
 		const SEED_DEMO_ON_FIRST_RUN = true;
 		/** 默认面板设置。 */
-		const DEFAULT_SETTINGS = { theme: "ocean", speed: "normal", refreshMs: DEFAULT_REFRESH_MS };
+		const DEFAULT_SETTINGS = { theme: "ocean", speed: "normal", refreshMs: DEFAULT_REFRESH_MS, alertEnabled: false, alertThreshold: 100 };
+		/**
+		 * 告警主题：余额跌破告警线时整套能量条/圆钮/柱形图切换为红色系
+		 * （结构与其他主题一致：5 色标渐变、首尾同色闭环）。
+		 */
+		const ALERT_THEME = {
+			back: ["hsl(0,75%,52%)", "hsl(10,80%,50%)", "hsl(350,72%,48%)", "hsl(330,70%,48%)", "hsl(0,75%,52%)"],
+			front: ["hsl(0,80%,60%)", "hsl(15,82%,56%)", "hsl(340,75%,56%)", "hsl(320,72%,54%)", "hsl(0,80%,60%)"],
+			icon: ["hsl(0,78%,56%)", "hsl(20,82%,52%)", "hsl(340,75%,54%)", "hsl(0,78%,56%)"],
+			col: ["hsl(0,75%,52%)", "hsl(15,78%,48%)"],
+			colCurrent: ["hsl(0,78%,54%)", "hsl(20,80%,50%)"]
+		};
 		/** 读取面板设置并与默认值合并（容错：坏数据回落默认）。 */
 		function loadSettings() {
 			try {
@@ -93,7 +104,9 @@ window.__ModuleLoader__.load({
 				const theme = parsed?.theme in THEMES ? parsed.theme : DEFAULT_SETTINGS.theme;
 				const speed = parsed?.speed in SPEEDS ? parsed.speed : DEFAULT_SETTINGS.speed;
 				const refreshMs = REFRESH_OPTIONS.some((item) => item.ms === parsed?.refreshMs) ? parsed.refreshMs : DEFAULT_SETTINGS.refreshMs;
-				return { theme, speed, refreshMs };
+				const alertEnabled = typeof parsed?.alertEnabled === "boolean" ? parsed.alertEnabled : DEFAULT_SETTINGS.alertEnabled;
+				const alertThreshold = Number.isFinite(parsed?.alertThreshold) && parsed.alertThreshold >= 0 ? parsed.alertThreshold : DEFAULT_SETTINGS.alertThreshold;
+				return { theme, speed, refreshMs, alertEnabled, alertThreshold };
 			} catch {
 				return { ...DEFAULT_SETTINGS };
 			}
@@ -296,6 +309,9 @@ window.__ModuleLoader__.load({
 			const [settingsOpen, setSettingsOpen] = react.useState(false);
 			const [hoverIndex, setHoverIndex] = react.useState(null);
 			const [uninstallState, setUninstallState] = react.useState("idle");
+			const [alertModalOpen, setAlertModalOpen] = react.useState(false);
+			const [thresholdDraft, setThresholdDraft] = react.useState(String(loadSettings().alertThreshold));
+			const alertDismissed = react.useRef(false);
 			const seededRef = react.useRef(false);
 			const inflight = react.useRef(null);
 			const panelRef = react.useRef(null);
@@ -409,13 +425,30 @@ window.__ModuleLoader__.load({
 			const todayTotal = columns.reduce((sum, col) => (col.ts >= todayStart.getTime() ? sum + col.consumed : sum), 0);
 			const hourLabel = (ts, current) => (current ? "现在" : `${new Date(ts).getHours()}时`);
 			// 当前主题与速度档；CSS 变量驱动波浪/呼吸时长（面板与 badge 同属一个 DOM 子树，自动继承）。
-			const theme = THEMES[settings.theme] ?? THEMES.ocean;
+			// 告警激活时整套配色切换为红色告警主题（能量条/圆钮/柱形图全红）。
+			const alertActive = settings.alertEnabled && hasMoney && total <= settings.alertThreshold;
+			const theme = alertActive ? ALERT_THEME : (THEMES[settings.theme] ?? THEMES.ocean);
 			const speed = SPEEDS[settings.speed] ?? SPEEDS.normal;
 			const cssVars = {
 				"--dsb-waveBack-dur": `${speed.waveBack}s`,
 				"--dsb-waveFront-dur": `${speed.waveFront}s`,
 				"--dsb-breathe-dur": `${speed.breathe}s`
 			};
+			// 告警弹窗：首次跌破弹一次；余额回升到阈值之上后重新武装。
+			react.useEffect(() => {
+				if (alertActive) {
+					if (!alertDismissed.current) {
+						setAlertModalOpen(true);
+						alertDismissed.current = true;
+					}
+				} else {
+					alertDismissed.current = false;
+				}
+			}, [alertActive]);
+			// 设置中的告警线变化时同步输入框草稿。
+			react.useEffect(() => {
+				setThresholdDraft(String(settings.alertThreshold));
+			}, [settings.alertThreshold]);
 			// 首次运行且无任何历史记录时，自动播种 24 小时演示数据（便于立刻查看图表效果）。
 			react.useEffect(() => {
 				if (seededRef.current) return;
@@ -514,6 +547,11 @@ window.__ModuleLoader__.load({
 												className: "dsb_bar dsb_barBig",
 												"aria-hidden": true,
 												children: renderWaves(theme)
+											}),
+											alertActive && jsxRuntime.jsx("p", {
+												className: "dsb_error",
+												role: "alert",
+												children: `⚠️ 余额已低于告警线 ${symbol}${formatMoney(settings.alertThreshold)}，请及时充值`
 											}),
 											jsxRuntime.jsxs("ul", {
 												className: "dsb_rows",
@@ -638,6 +676,54 @@ window.__ModuleLoader__.load({
 													jsxRuntime.jsxs("div", {
 														className: "dsb_setRow",
 														children: [
+															jsxRuntime.jsx("span", { className: "dsb_setLabel", children: "余额告警" }),
+															jsxRuntime.jsx("div", {
+																className: "dsb_setChips",
+																children: [
+																	jsxRuntime.jsx("button", {
+																		type: "button",
+																		className: "dsb_setChip",
+																		"data-on": settings.alertEnabled || void 0,
+																		onClick: () => updateSettings({ alertEnabled: true }),
+																		children: "开启"
+																	}, "alert-on"),
+																	jsxRuntime.jsx("button", {
+																		type: "button",
+																		className: "dsb_setChip",
+																		"data-on": settings.alertEnabled ? void 0 : true,
+																		onClick: () => updateSettings({ alertEnabled: false }),
+																		children: "关闭"
+																	}, "alert-off")
+																]
+															}),
+															jsxRuntime.jsxs("div", {
+																className: "dsb_alertInputRow",
+																children: [
+																	jsxRuntime.jsx("span", { children: "告警线" }),
+																	jsxRuntime.jsx("input", {
+																		className: "dsb_input",
+																		type: "number",
+																		min: "0",
+																		step: "1",
+																		value: thresholdDraft,
+																		onChange: (event) => setThresholdDraft(event.target.value),
+																		onBlur: () => {
+																			const value = Number(thresholdDraft);
+																			if (Number.isFinite(value) && value >= 0) {
+																				updateSettings({ alertThreshold: value });
+																			} else {
+																				setThresholdDraft(String(settings.alertThreshold));
+																			}
+																		}
+																	}),
+																	jsxRuntime.jsx("span", { children: "元" })
+																]
+															})
+														]
+													}),
+													jsxRuntime.jsxs("div", {
+														className: "dsb_setRow",
+														children: [
 															jsxRuntime.jsx("span", { className: "dsb_setLabel", children: "卸载" }),
 															jsxRuntime.jsx("button", {
 																type: "button",
@@ -669,6 +755,7 @@ window.__ModuleLoader__.load({
 						className: "dsb_badge",
 						"data-dsb-badge": true,
 						"data-dsb-error": state.status === "error" || void 0,
+						"data-dsb-alert": alertActive || void 0,
 						"data-active": open || void 0,
 						"aria-label": badgeTitle,
 						"aria-expanded": open,
@@ -710,6 +797,44 @@ window.__ModuleLoader__.load({
 							!wide && jsxRuntime.jsx("span", {
 								className: "dsb_railAmount",
 								children: badgeMoney
+							})
+						]
+					}),
+					alertModalOpen && jsxRuntime.jsxs("div", {
+						className: "dsb_modalMask",
+						children: [
+							jsxRuntime.jsxs("div", {
+								className: "dsb_modal",
+								role: "alertdialog",
+								"aria-modal": true,
+								"aria-label": "余额不足提醒",
+								children: [
+									jsxRuntime.jsx("div", { className: "dsb_modalTitle", children: "⚠️ 余额不足提醒" }),
+									jsxRuntime.jsx("p", {
+										className: "dsb_modalBody",
+										children: `当前余额 ${symbol}${formatMoney(total)}，已低于你设置的告警线 ${symbol}${formatMoney(settings.alertThreshold)}。请及时充值，避免影响使用。`
+									}),
+									jsxRuntime.jsxs("div", {
+										className: "dsb_modalActions",
+										children: [
+											jsxRuntime.jsx("button", {
+												type: "button",
+												className: "dsb_modalBtn",
+												onClick: () => setAlertModalOpen(false),
+												children: "知道了"
+											}),
+											jsxRuntime.jsx("button", {
+												type: "button",
+												className: "dsb_modalBtn dsb_modalBtnPrimary",
+												onClick: () => {
+													window.open("https://platform.deepseek.com/top_up", "_blank", "noopener");
+													setAlertModalOpen(false);
+												},
+												children: "去充值"
+											})
+										]
+									})
+								]
 							})
 						]
 					})
