@@ -24,6 +24,10 @@
 
 <img src="docs/screenshots/04-alert.png" alt="余额告警" width="720">
 
+**深色模式适配**（弹窗与按钮跟随 DSH 主题，两种模式均已实测）：
+
+<img src="docs/screenshots/05-alert-dark.png" alt="深色模式告警" width="720">
+
 **侧栏常驻入口**（收起为胶囊、展开为「总余额 + 波浪能量条」，呼吸动画常驻）：
 
 <img src="docs/screenshots/01-overview.png" alt="侧栏入口" width="720">

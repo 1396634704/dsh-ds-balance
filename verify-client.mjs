@@ -93,6 +93,11 @@ for (const marker of ["ALERT_THEME", "dsb_modalMask", "dsb_modalBtnPrimary", "al
 for (const marker of ["testAlert", "closeAlertModal", "结束测试", "告警效果测试"]) {
   if (!bundleText.includes(marker)) throw new Error(`告警测试按钮回归失败：bundle 缺少 ${marker}`);
 }
+// 深色模式适配回归：主按钮文字必须跟随 DSH 的 label-primary-foreground
+//（深色主题下 button-primary-fill 是白色，硬编码 #fff 会造成白底白字）。
+if (!bundleText.includes("--dsw-alias-label-primary-foreground")) {
+  throw new Error("深色模式适配回归失败：主按钮文字色未使用 label-primary-foreground 变量");
+}
 // 四个头部按钮统一 24px/13px 图标样式（用户拍板），防止字号回退不一致。
 for (const btn of [".dsb_link", ".dsb_gear", ".dsb_refresh", ".dsb_close"]) {
   if (!bundleText.includes(`${btn}{width:24px;height:24px;`) || !bundleText.includes("font-size:13px")) {
