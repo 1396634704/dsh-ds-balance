@@ -119,7 +119,28 @@ node verify-client.mjs   # 离线验证（Node 模拟加载 + SSR 渲染）
 | `package.json` | 包清单（`exports` 必须含 `./package.json`，DSH 扫描依赖它） |
 | `install.sh` | 一键安装（macOS / Linux / Git Bash / WSL，幂等） |
 | `install.ps1` | 一键安装（Windows PowerShell，幂等） |
+| `uninstall.mjs` | 命令行卸载（Node 跨平台，幂等） |
 | `verify-client.mjs` | 离线验证脚本 |
+
+## 卸载
+
+本插件以 DSH 官方**静态 patch 方式**挂载（`cordis.patch.yml` + profile `node_modules`），
+因此**不会出现在设置页的「插件清单」里**——那个面板只管理经 DSH 动态插件系统安装的包，
+这是 DSH 的机制设计，并非本插件缺失功能。为此本插件自带两条卸载路径：
+
+**方式一：面板内一键卸载（推荐）**
+打开余额面板 → 点 ⚙ 打开设置 → 底部「卸载插件」按钮 → 确认。
+将自动移除 cordis.patch.yml 中的登记并删除插件文件，重启 `dsh web` 后彻底生效。
+
+**方式二：命令行卸载**
+
+```bash
+node uninstall.mjs                     # 卸载默认位置（~/.dsh 的 web profile）
+node uninstall.mjs /path/to/.dsh web   # 指定 DSH home 与 profile
+```
+
+两种方式均为幂等操作，重复执行安全；卸载后浏览器里的设置与用量记录仍保留在
+localStorage，可在 Console 执行 `localStorage.removeItem('dsh-ds-balance:hours'); localStorage.removeItem('dsh-ds-balance:settings')` 清理。
 
 ## 平台支持与已知问题
 

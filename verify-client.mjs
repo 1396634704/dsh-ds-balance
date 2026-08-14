@@ -84,6 +84,9 @@ if (!bundleText.includes("dsb_link") || !bundleText.includes("platform.deepseek.
 if (!bundleText.includes("dsb_tip") || !bundleText.includes("onMouseEnter")) {
   throw new Error("柱形图悬停数值气泡回归失败");
 }
+if (!bundleText.includes("dsb_uninstall") || !bundleText.includes("/api/deepseek-balance/uninstall")) {
+  throw new Error("卸载入口回归失败：bundle 缺少卸载按钮或卸载端点调用");
+}
 // 四个头部按钮统一 24px/13px 图标样式（用户拍板），防止字号回退不一致。
 for (const btn of [".dsb_link", ".dsb_gear", ".dsb_refresh", ".dsb_close"]) {
   if (!bundleText.includes(`${btn}{width:24px;height:24px;`) || !bundleText.includes("font-size:13px")) {
