@@ -81,8 +81,18 @@ dsh web
 | 颜色 | 海洋（默认）/ 森林 / 晚霞 / 紫夜——波浪、圆钮、柱形图同步换色 |
 | 动画速度 | 慢 / 标准（默认）/ 快 |
 | 余额刷新 | 10 秒（默认）/ 30 秒 / 60 秒 |
+| 余额告警 | 关闭（默认）/ 开启 + 告警线金额（默认 100 元） |
 
 设置保存在浏览器 localStorage（`dsh-ds-balance:settings`），刷新页面不丢失。
+
+## 余额自动告警
+
+在设置面板开启「余额告警」并设定告警线后，当总余额 **≤ 告警线** 时：
+
+- 整套能量条/圆钮/柱形图切换为**红色告警主题**（动画保持），侧栏金额变红；
+- 面板内显示红色警示行；
+- **屏幕中央弹出确认模态框**：显示当前余额与告警线，提供「去充值」（直达官方充值页 platform.deepseek.com/top_up）与「知道了」；支持 ESC 或点击遮罩关闭；
+- 弹窗只提醒一次，**余额回升到告警线以上后自动重新武装**，下次跌破会再次提醒。
 
 ## 每小时用量图（估算）
 
@@ -130,7 +140,7 @@ node verify-client.mjs   # 离线验证（Node 模拟加载 + SSR 渲染）
 
 **方式一：面板内一键卸载（推荐）**
 打开余额面板 → 点 ⚙ 打开设置 → 底部「卸载插件」按钮 → 确认。
-将自动移除 cordis.patch.yml 中的登记并删除插件文件，重启 `dsh web` 后彻底生效。
+将自动移除 cordis.patch.yml 中的登记、删除插件文件，并清理浏览器本地的设置与用量记录，重启 `dsh web` 后彻底生效。
 
 **方式二：命令行卸载**
 
@@ -139,8 +149,8 @@ node uninstall.mjs                     # 卸载默认位置（~/.dsh 的 web pro
 node uninstall.mjs /path/to/.dsh web   # 指定 DSH home 与 profile
 ```
 
-两种方式均为幂等操作，重复执行安全；卸载后浏览器里的设置与用量记录仍保留在
-localStorage，可在 Console 执行 `localStorage.removeItem('dsh-ds-balance:hours'); localStorage.removeItem('dsh-ds-balance:settings')` 清理。
+两种方式均为幂等操作，重复执行安全；命令行方式不会清理浏览器 localStorage，
+如需彻底清理可在 Console 执行 `localStorage.removeItem('dsh-ds-balance:hours'); localStorage.removeItem('dsh-ds-balance:settings')`。
 
 ## 平台支持与已知问题
 
