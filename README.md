@@ -45,6 +45,7 @@ dsh web
 ```
 
 > PowerShell 5.1（Win10/11 自带）或 7+ 均可，无需管理员权限。
+> ⚠️ Windows 支持存在已知限制，详见下文 [平台支持与已知问题](#平台支持与已知问题)。
 
 刷新浏览器（http://127.0.0.1:3080），侧栏底部即可看到余额面板。
 
@@ -119,6 +120,24 @@ node verify-client.mjs   # 离线验证（Node 模拟加载 + SSR 渲染）
 | `install.sh` | 一键安装（macOS / Linux / Git Bash / WSL，幂等） |
 | `install.ps1` | 一键安装（Windows PowerShell，幂等） |
 | `verify-client.mjs` | 离线验证脚本 |
+
+## 平台支持与已知问题
+
+| 平台 | 状态 |
+|---|---|
+| macOS | ✅ 已实测（本插件的开发、离线验证与冒烟测试均在 macOS 完成） |
+| Linux | 🟡 未实测：`install.sh` 只依赖标准 POSIX 工具（sh/awk/cp），预期可用 |
+| Windows | 🟡 提供 `install.ps1`，但**未在真实 Windows 环境实测**，可能存在兼容性问题 |
+
+**Windows 已知兼容性事项：**
+
+1. `install.ps1` 按 PowerShell 5.1（Win10/11 自带）与 7+ 兼容语法编写，但未经 Windows 真机验证；若运行报错请提 issue，并附 Windows 版本、PowerShell 版本（`$PSVersionTable.PSVersion`）与完整报错信息。
+2. PowerShell 默认执行策略可能禁止运行脚本，任选其一绕过：
+   - `powershell -ExecutionPolicy Bypass -File .\install.ps1`
+   - 先执行 `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`，再 `.\install.ps1`
+3. 原生 cmd/PowerShell 无法运行 `install.sh`（bash 脚本）；Windows 用户要么用 `install.ps1`，要么在 Git Bash/WSL 中运行 `install.sh`。
+4. 插件本体（host 面为纯 Node、client 面为纯浏览器代码）不依赖平台特性，DSH 的插件机制（cordis.patch.yml + profile node_modules 解析）在 Windows 上预期与 macOS/Linux 行为一致；但**以上预期同样未在 Windows 上验证**。
+5. Windows 下 DSH home 默认位于 `%USERPROFILE%\.dsh`；未配置 key 时面板提示的路径会按系统用户目录自动生成。
 
 ## 故障排查
 
