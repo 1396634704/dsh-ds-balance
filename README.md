@@ -1,0 +1,92 @@
+# dsh-ds-balance
+
+在 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) Web GUI（`dsh web`）侧栏底部常驻展示 **DeepSeek 账户余额**的本地双面插件。
+
+- **侧栏收起（窄）**：横胶囊，波浪呼吸背景 + 余额金额直接印在上面；
+- **侧栏展开（宽）**：「总余额 ¥xxx」+ 波浪能量条（双层波浪起伏流动 + 呼吸）；
+- **点击面板**：总余额、充值余额、刷新 / 关闭按钮、更新时间。
+
+数据每 10 秒自动刷新（刷新过程不闪烁，仅数字变化）；波浪为纯装饰动画，系统开启"减少动态效果"时自动静止。
+
+> 说明：DeepSeek 余额接口只返回「当前剩余金额」，没有历史充值 / 消耗数据，因此能量条不做百分比语义，纯作装饰。
+
+## 快速开始（3 步）
+
+```bash
+# 1. 获取插件
+git clone https://github.com/1396634704/dsh-ds-balance.git
+cd dsh-ds-balance
+
+# 2. 安装到默认位置（~/.dsh 的 web profile）
+./install.sh
+# 或指定 DSH home 与 profile：
+# ./install.sh /path/to/.dsh web
+
+# 3. 重启 dsh web（在运行 dsh web 的终端 Ctrl+C 后重新运行）
+dsh web
+```
+
+刷新浏览器（http://127.0.0.1:3080），侧栏底部即可看到余额面板。
+
+## 前提条件
+
+| 条件 | 说明 |
+|---|---|
+| DeepSeek Harness ≥ 0.1.0-rc.6 | 需要 web profile 的用户补丁层（`cordis.patch.yml`）与 `profiles/node_modules` 依赖平面 |
+| `DEEPSEEK_API_KEY` 已配置 | 位于 `~/.dsh/.credentials.yaml`。**用 DeepSeek 官方模型跑 DSH 的部署本来就有这一项，装上即用，零额外配置**；未配置时安装脚本会提示，补一行即可 |
+| 可直连 `api.deepseek.com` | 余额查询直接调用 DeepSeek 官方接口 |
+
+## 工作原理
+
+```
+浏览器（client 面，client.js）── fetch ──▶ 宿主（host 面，index.js）
+   侧栏底部 slot                            GET /api/deepseek-balance
+                                            │  读 DSH credentials seam 的
+                                            │  DEEPSEEK_API_KEY（密钥不下发浏览器）
+                                            ▼
+                                GET https://api.deepseek.com/user/balance
+```
+
+- **host 面**：注册只读端点 `/api/deepseek-balance`，仅回环地址可访问（防 DNS rebinding）；
+- **client 面**：预构建 classic-script bundle，注册到 `sidebar.footer.action` slot；
+- 插件遵循 DSH 官方插件机制（`cordis.patch.yml` 登记 + profile `node_modules` 解析），不修改 DSH 本体。
+
+## 常见调整
+
+| 想改什么 | 改哪里 |
+|---|---|
+| 自动刷新间隔（默认 10 秒） | `client.js` 中 `AUTO_REFRESH_MS` |
+| 波浪速度 / 呼吸节奏 | `client.js` 中 `dsb-wave` / `dsb-breathe` 动画时长 |
+| 波浪颜色 | `client.js` 中 `renderWaves` 的两个 `linearGradient` |
+| 面板尺寸 / 位置 | `client.js` 中 `.dsb_panel` / `.dsb_bar` 样式 |
+
+改完 `client.js` 后：
+
+```bash
+node verify-client.mjs   # 离线验证（Node 模拟加载 + SSR 渲染）
+```
+
+然后重启 `dsh web` 并刷新浏览器（client 面必须重启进程才生效，这是 DSH 客户端插件的扫描机制）。
+
+## 文件结构
+
+| 文件 | 说明 |
+|---|---|
+| `index.js` | host 面：余额查询端点 |
+| `client.js` | browser 面：侧栏余额面板 bundle |
+| `package.json` | 包清单（`exports` 必须含 `./package.json`，DSH 扫描依赖它） |
+| `install.sh` | 一键安装（拷贝 + 幂等登记，跨 macOS / Linux） |
+| `verify-client.mjs` | 离线验证脚本 |
+
+## 故障排查
+
+| 现象 | 处理 |
+|---|---|
+| 侧栏看不到面板 | 重启 `dsh web` 了吗？client 面必须重启进程；然后硬刷新浏览器（Cmd+Shift+R） |
+| 面板显示"查询失败：DEEPSEEK_API_KEY 未配置" | 在 `~/.dsh/.credentials.yaml` 添加 `DEEPSEEK_API_KEY: sk-xxx`，刷新即可（无需重启） |
+| 页面白屏 | 新终端运行 `node verify-client.mjs` 自查 bundle；查看 `dsh web` 终端报错 |
+| 面板显示"查询失败：Forbidden" | 插件仅允许回环访问；经局域网 IP 访问 GUI 的场景暂不支持 |
+
+## License
+
+[MIT](./LICENSE)

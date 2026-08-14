@@ -1,0 +1,18 @@
+{
+  "name": "dsh-ds-balance",
+  "version": "1.0.0",
+  "description": "DeepSeek 账户余额面板：host 端点（/api/deepseek-balance）+ Web GUI 侧栏余额展示",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web"
+    }
+  },
+  "license": "MIT"
+}
