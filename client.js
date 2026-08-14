@@ -9,7 +9,7 @@ window.__ModuleLoader__.load({
 		//#region 样式：DeepSeek 余额波浪能量条（对齐 DSH 主题变量）
 		// 能量条为纯装饰：双层 SVG 波浪前后交错流动（波面起伏）+ "快吸慢呼"式呼吸，
 		// 外层入口与面板常驻动画，不表达任何比例语义。
-		const css = ".dsb_layer{flex:none;align-items:center;width:100%;margin:8px 0 0;display:flex;position:relative}.dsb_layer.dsb_rail{width:52px;margin:0;justify-content:center}.dsb_badge{box-sizing:border-box;width:100%;color:var(--dsw-alias-label-primary);cursor:pointer;background:0 0;border:none;border-radius:12px;align-items:center;gap:8px;padding:7px 10px 7px 8px;font-family:inherit;font-size:14px;display:flex;overflow:hidden;text-align:left}.dsb_badge:hover{background:var(--dsw-alias-interactive-bg-hover-solid)}.dsb_badge[data-active]{background:var(--dsw-alias-interactive-bg-hover)}.dsb_icon{flex:none;width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,hsl(220,78%,62%),hsl(190,72%,54%),hsl(280,72%,62%),hsl(220,78%,62%));background-size:200% 200%;color:#fff;justify-content:center;align-items:center;font-size:12px;font-weight:700;line-height:1;display:inline-flex;animation:dsb-flow 11s linear infinite,dsb-breathe 4.2s ease-in-out infinite}.dsb_rail .dsb_badge{width:52px;height:20px;border-radius:10px;padding:0;position:relative}.dsb_rail .dsb_badge[data-dsb-error]{background:var(--dsw-alias-fill-l2)}.dsb_railWaves{position:absolute;inset:0;overflow:hidden;border-radius:10px}.dsb_railAmount{position:relative;z-index:1;color:#fff;font-size:9px;line-height:20px;font-variant-numeric:tabular-nums;text-shadow:0 0 3px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.4);white-space:nowrap;pointer-events:none}.dsb_rail .dsb_badge[data-dsb-error] .dsb_railAmount{color:var(--dsw-alias-state-error-primary);text-shadow:none}.dsb_main{flex:1;min-width:0;flex-direction:column;gap:5px;display:flex}.dsb_row1{align-items:center;gap:6px;display:flex}.dsb_label{color:var(--dsw-alias-label-primary);font-size:12px;line-height:16px;white-space:nowrap}.dsb_count{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:16px;white-space:nowrap}.dsb_countError{color:var(--dsw-alias-state-error-primary)}.dsb_bar{flex:none;width:100%;height:14px;border-radius:999px;background:var(--dsw-alias-fill-l2);overflow:hidden;position:relative}.dsb_waves{position:absolute;inset:0;animation:dsb-breathe 4.2s ease-in-out infinite}.dsb_wave{position:absolute;top:0;left:0;height:100%;width:200%;display:block}.dsb_waveBack{opacity:.42;animation:dsb-wave 7s linear infinite}.dsb_waveFront{opacity:.8;animation:dsb-wave 5.2s linear infinite reverse}.dsb_panel{z-index:30;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-base);width:320px;max-width:calc(100vw - 24px);box-shadow:var(--dsw-shadow-lv2);border-radius:12px;flex-direction:column;display:flex;position:fixed;bottom:76px;left:12px;overflow:hidden}.dsb_header{box-sizing:border-box;border-bottom:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);flex:none;justify-content:space-between;align-items:center;min-height:44px;padding:10px 12px;display:flex;gap:8px}.dsb_title{color:var(--dsw-alias-label-primary);font-size:13px;font-weight:500;line-height:20px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dsb_refresh{border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary);font:inherit;font-size:12px;line-height:18px;cursor:pointer;background:0 0;border-radius:999px;padding:2px 10px;flex:none}.dsb_refresh:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover)}.dsb_refresh:disabled{opacity:.4;cursor:default}.dsb_close{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:14px;line-height:1;display:inline-flex;flex:none}.dsb_close:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_body{flex-direction:column;gap:10px;padding:14px 12px 12px;display:flex}.dsb_totalRow{align-items:baseline;gap:8px;display:flex}.dsb_totalLabel{color:var(--dsw-alias-label-tertiary);font-size:13px;line-height:20px;flex:none}.dsb_total{color:var(--dsw-alias-label-primary);font-variant-numeric:tabular-nums;font-size:24px;font-weight:600;line-height:30px}.dsb_barBig{height:14px;flex:none}.dsb_rows{flex-direction:column;gap:2px;margin:0;padding:0;list-style:none;display:flex}.dsb_row{justify-content:space-between;align-items:center;min-height:26px;display:flex}.dsb_rowLabel{color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:18px}.dsb_rowValue{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:18px}.dsb_error{color:var(--dsw-alias-state-error-primary);margin:0;font-size:12px;line-height:18px}.dsb_note{color:var(--dsw-alias-label-tertiary);margin:0;font-size:11px;line-height:16px}@keyframes dsb-wave{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}@keyframes dsb-breathe{0%{opacity:.72}35%{opacity:1}100%{opacity:.72}}@keyframes dsb-flow{0%{background-position:0% 50%}100%{background-position:100% 50%}}@media (prefers-reduced-motion:reduce){.dsb_wave,.dsb_waves,.dsb_icon{animation:none}}.dsb_chartWrap{flex-direction:column;gap:6px;margin-top:4px;display:flex}.dsb_chartHead{justify-content:space-between;align-items:baseline;display:flex}.dsb_chartTitle{color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:18px}.dsb_chartTotal{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:18px}.dsb_chart{align-items:flex-end;gap:3px;height:64px;padding:0 2px;display:flex}.dsb_col{flex:1;height:100%;justify-content:flex-end;display:flex;min-width:0}.dsb_colFill{width:100%;border-radius:3px 3px 0 0;background:linear-gradient(180deg,hsl(220,72%,60%),hsl(190,68%,52%));transition:height .3s ease}.dsb_colFill[data-current]{background:linear-gradient(180deg,hsl(45,80%,56%),hsl(15,80%,58%))}.dsb_colEmpty{width:100%;height:2px;border-radius:1px;background:var(--dsw-alias-fill-l2)}.dsb_chartAxis{justify-content:space-between;color:var(--dsw-alias-label-caption);font-size:10px;line-height:14px;display:flex}.dsb_chartNote{color:var(--dsw-alias-label-caption);margin:0;font-size:10px;line-height:14px}";
+		const css = ".dsb_layer{flex:none;align-items:center;width:100%;margin:8px 0 0;display:flex;position:relative}.dsb_layer.dsb_rail{width:52px;margin:0;justify-content:center}.dsb_badge{box-sizing:border-box;width:100%;color:var(--dsw-alias-label-primary);cursor:pointer;background:0 0;border:none;border-radius:12px;align-items:center;gap:8px;padding:7px 10px 7px 8px;font-family:inherit;font-size:14px;display:flex;overflow:hidden;text-align:left}.dsb_badge:hover{background:var(--dsw-alias-interactive-bg-hover-solid)}.dsb_badge[data-active]{background:var(--dsw-alias-interactive-bg-hover)}.dsb_icon{flex:none;width:24px;height:24px;border-radius:50%;background-size:200% 200%;color:#fff;justify-content:center;align-items:center;font-size:12px;font-weight:700;line-height:1;display:inline-flex;animation:dsb-flow 11s linear infinite,dsb-breathe var(--dsb-breathe-dur,4.2s) ease-in-out infinite}.dsb_rail .dsb_badge{width:52px;height:20px;border-radius:10px;padding:0;position:relative}.dsb_rail .dsb_badge[data-dsb-error]{background:var(--dsw-alias-fill-l2)}.dsb_railWaves{position:absolute;inset:0;overflow:hidden;border-radius:10px}.dsb_railAmount{position:relative;z-index:1;color:#fff;font-size:9px;line-height:20px;font-variant-numeric:tabular-nums;text-shadow:0 0 3px rgba(0,0,0,.55),0 1px 2px rgba(0,0,0,.4);white-space:nowrap;pointer-events:none}.dsb_rail .dsb_badge[data-dsb-error] .dsb_railAmount{color:var(--dsw-alias-state-error-primary);text-shadow:none}.dsb_main{flex:1;min-width:0;flex-direction:column;gap:5px;display:flex}.dsb_row1{align-items:center;gap:6px;display:flex}.dsb_label{color:var(--dsw-alias-label-primary);font-size:12px;line-height:16px;white-space:nowrap}.dsb_count{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:16px;white-space:nowrap}.dsb_countError{color:var(--dsw-alias-state-error-primary)}.dsb_bar{flex:none;width:100%;height:14px;border-radius:999px;background:var(--dsw-alias-fill-l2);overflow:hidden;position:relative}.dsb_waves{position:absolute;inset:0;animation:dsb-breathe var(--dsb-breathe-dur,4.2s) ease-in-out infinite}.dsb_wave{position:absolute;top:0;left:0;height:100%;width:200%;display:block}.dsb_waveBack{opacity:.42;animation:dsb-wave var(--dsb-waveBack-dur,7s) linear infinite}.dsb_waveFront{opacity:.8;animation:dsb-wave var(--dsb-waveFront-dur,5.2s) linear infinite reverse}.dsb_panel{z-index:30;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-base);width:320px;max-width:calc(100vw - 24px);box-shadow:var(--dsw-shadow-lv2);border-radius:12px;flex-direction:column;display:flex;position:fixed;bottom:76px;left:12px;overflow:hidden}.dsb_header{box-sizing:border-box;border-bottom:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);flex:none;justify-content:space-between;align-items:center;min-height:44px;padding:10px 12px;display:flex;gap:8px}.dsb_title{color:var(--dsw-alias-label-primary);font-size:13px;font-weight:500;line-height:20px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dsb_refresh{border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary);font:inherit;font-size:12px;line-height:18px;cursor:pointer;background:0 0;border-radius:999px;padding:2px 10px;flex:none}.dsb_refresh:hover:not(:disabled){background:var(--dsw-alias-interactive-bg-hover)}.dsb_refresh:disabled{opacity:.4;cursor:default}.dsb_close{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:14px;line-height:1;display:inline-flex;flex:none}.dsb_close:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_body{flex-direction:column;gap:10px;padding:14px 12px 12px;display:flex}.dsb_totalRow{align-items:baseline;gap:8px;display:flex}.dsb_totalLabel{color:var(--dsw-alias-label-tertiary);font-size:13px;line-height:20px;flex:none}.dsb_total{color:var(--dsw-alias-label-primary);font-variant-numeric:tabular-nums;font-size:24px;font-weight:600;line-height:30px}.dsb_barBig{height:14px;flex:none}.dsb_rows{flex-direction:column;gap:2px;margin:0;padding:0;list-style:none;display:flex}.dsb_row{justify-content:space-between;align-items:center;min-height:26px;display:flex}.dsb_rowLabel{color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:18px}.dsb_rowValue{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:18px}.dsb_error{color:var(--dsw-alias-state-error-primary);margin:0;font-size:12px;line-height:18px}.dsb_note{color:var(--dsw-alias-label-tertiary);margin:0;font-size:11px;line-height:16px}@keyframes dsb-wave{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}@keyframes dsb-breathe{0%{opacity:.72}35%{opacity:1}100%{opacity:.72}}@keyframes dsb-flow{0%{background-position:0% 50%}100%{background-position:100% 50%}}@media (prefers-reduced-motion:reduce){.dsb_wave,.dsb_waves,.dsb_icon{animation:none}}.dsb_chartWrap{flex-direction:column;gap:6px;margin-top:4px;display:flex}.dsb_chartHead{justify-content:space-between;align-items:baseline;display:flex}.dsb_chartTitle{color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:18px}.dsb_chartTotal{color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums;font-size:12px;line-height:18px}.dsb_chart{align-items:flex-end;gap:3px;height:64px;padding:0 2px;display:flex}.dsb_col{flex:1;height:100%;justify-content:flex-end;display:flex;min-width:0}.dsb_colFill{width:100%;border-radius:3px 3px 0 0;transition:height .3s ease}.dsb_colEmpty{width:100%;height:2px;border-radius:1px;background:var(--dsw-alias-fill-l2)}.dsb_chartAxis{justify-content:space-between;color:var(--dsw-alias-label-caption);font-size:10px;line-height:14px;display:flex}.dsb_chartNote{color:var(--dsw-alias-label-caption);margin:0;font-size:10px;line-height:14px}.dsb_gear{width:24px;height:24px;color:var(--dsw-alias-label-tertiary);cursor:pointer;background:0 0;border:none;border-radius:999px;justify-content:center;align-items:center;padding:0;font-size:13px;line-height:1;display:inline-flex;flex:none}.dsb_gear:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary)}.dsb_gear[data-on]{color:var(--dsw-alias-button-primary-fill,#4d6bfe)}.dsb_settings{flex-direction:column;gap:8px;border:1px solid var(--dsw-alias-border-l2);border-radius:10px;padding:10px;display:flex}.dsb_setRow{flex-direction:column;gap:4px;display:flex}.dsb_setLabel{color:var(--dsw-alias-label-tertiary);font-size:11px;line-height:16px}.dsb_setChips{flex-wrap:wrap;gap:4px;display:flex}.dsb_setChip{border:1px solid var(--dsw-alias-border-l2);color:var(--dsw-alias-label-secondary);font:inherit;font-size:11px;line-height:18px;cursor:pointer;background:0 0;border-radius:999px;padding:1px 10px}.dsb_setChip:hover{background:var(--dsw-alias-interactive-bg-hover)}.dsb_setChip[data-on]{border-color:var(--dsw-alias-button-primary-fill,#4d6bfe);color:var(--dsw-alias-button-primary-fill,#4d6bfe);background:var(--dsw-alias-interactive-bg-hover)}";
 		const tagId = "dsh-ds-balance/balance.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId) + "]") === null) {
 			const tag = document.createElement("style");
@@ -22,10 +22,91 @@ window.__ModuleLoader__.load({
 		//#region 余额波浪能量条组件
 		/** 币种符号表：未知币种直接显示代码。 */
 		const CURRENCY_SYMBOLS = { CNY: "¥", USD: "$" };
-		/** 自动刷新间隔（毫秒）：用户要求 10 秒一次。 */
-		const AUTO_REFRESH_MS = 10 * 1000;
+		/** 默认自动刷新间隔（毫秒），设置面板可切换 10/30/60 秒。 */
+		const DEFAULT_REFRESH_MS = 10 * 1000;
+		/** 刷新频率档位。 */
+		const REFRESH_OPTIONS = [
+			{ ms: 10 * 1000, label: "10秒" },
+			{ ms: 30 * 1000, label: "30秒" },
+			{ ms: 60 * 1000, label: "60秒" }
+		];
+		/** 动画速度档位：双层波浪与呼吸的时长（秒）。 */
+		const SPEEDS = {
+			slow: { waveBack: 11, waveFront: 8, breathe: 6.5, label: "慢" },
+			normal: { waveBack: 7, waveFront: 5.2, breathe: 4.2, label: "标准" },
+			fast: { waveBack: 4, waveFront: 3, breathe: 2.6, label: "快" }
+		};
+		/**
+		 * 颜色主题表：每套包含后层/前层渐变（5 色标，首尾同色闭环）、
+		 * 圆钮渐变（4 色标）与柱形图渐变（普通柱 2 色 + 当前柱 2 色）。
+		 * 色相按相邻小步递进，保证过渡平滑。
+		 */
+		const THEMES = {
+			ocean: {
+				name: "海洋",
+				back: ["hsl(216,72%,58%)", "hsl(196,68%,52%)", "hsl(176,62%,48%)", "hsl(158,58%,48%)", "hsl(216,72%,58%)"],
+				front: ["hsl(232,70%,64%)", "hsl(214,68%,60%)", "hsl(252,65%,62%)", "hsl(278,62%,60%)", "hsl(232,70%,64%)"],
+				icon: ["hsl(220,78%,62%)", "hsl(190,72%,54%)", "hsl(280,72%,62%)", "hsl(220,78%,62%)"],
+				col: ["hsl(220,72%,60%)", "hsl(190,68%,52%)"],
+				colCurrent: ["hsl(45,80%,56%)", "hsl(15,80%,58%)"]
+			},
+			forest: {
+				name: "森林",
+				back: ["hsl(150,60%,44%)", "hsl(120,55%,40%)", "hsl(90,58%,42%)", "hsl(60,62%,44%)", "hsl(150,60%,44%)"],
+				front: ["hsl(160,65%,52%)", "hsl(130,60%,46%)", "hsl(100,58%,44%)", "hsl(70,60%,46%)", "hsl(160,65%,52%)"],
+				icon: ["hsl(150,62%,46%)", "hsl(90,60%,42%)", "hsl(50,68%,48%)", "hsl(150,62%,46%)"],
+				col: ["hsl(150,60%,46%)", "hsl(90,58%,44%)"],
+				colCurrent: ["hsl(45,80%,56%)", "hsl(15,80%,58%)"]
+			},
+			sunset: {
+				name: "晚霞",
+				back: ["hsl(20,75%,58%)", "hsl(40,78%,55%)", "hsl(0,70%,54%)", "hsl(340,65%,52%)", "hsl(20,75%,58%)"],
+				front: ["hsl(35,85%,62%)", "hsl(10,80%,58%)", "hsl(350,72%,56%)", "hsl(320,68%,54%)", "hsl(35,85%,62%)"],
+				icon: ["hsl(30,85%,58%)", "hsl(0,75%,55%)", "hsl(330,72%,56%)", "hsl(30,85%,58%)"],
+				col: ["hsl(30,80%,56%)", "hsl(0,70%,52%)"],
+				colCurrent: ["hsl(45,80%,56%)", "hsl(15,80%,58%)"]
+			},
+			violet: {
+				name: "紫夜",
+				back: ["hsl(265,70%,58%)", "hsl(290,68%,54%)", "hsl(315,65%,50%)", "hsl(230,70%,52%)", "hsl(265,70%,58%)"],
+				front: ["hsl(275,72%,64%)", "hsl(255,68%,60%)", "hsl(235,66%,58%)", "hsl(300,65%,58%)", "hsl(275,72%,64%)"],
+				icon: ["hsl(270,72%,60%)", "hsl(310,68%,56%)", "hsl(230,72%,58%)", "hsl(270,72%,60%)"],
+				col: ["hsl(270,70%,58%)", "hsl(310,65%,52%)"],
+				colCurrent: ["hsl(45,80%,56%)", "hsl(15,80%,58%)"]
+			}
+		};
 		/** 每小时用量记录的 localStorage 键名。 */
 		const HOURS_KEY = "dsh-ds-balance:hours";
+		/** 面板设置的 localStorage 键名。 */
+		const SETTINGS_KEY = "dsh-ds-balance:settings";
+		/** 首次运行且无任何历史记录时，自动播种 24 小时演示数据（便于立刻查看图表效果）。 */
+		const SEED_DEMO_ON_FIRST_RUN = true;
+		/** 默认面板设置。 */
+		const DEFAULT_SETTINGS = { theme: "ocean", speed: "normal", refreshMs: DEFAULT_REFRESH_MS };
+		/** 读取面板设置并与默认值合并（容错：坏数据回落默认）。 */
+		function loadSettings() {
+			try {
+				if (typeof localStorage === "undefined") return { ...DEFAULT_SETTINGS };
+				const raw = localStorage.getItem(SETTINGS_KEY);
+				if (raw === null) return { ...DEFAULT_SETTINGS };
+				const parsed = JSON.parse(raw);
+				const theme = parsed?.theme in THEMES ? parsed.theme : DEFAULT_SETTINGS.theme;
+				const speed = parsed?.speed in SPEEDS ? parsed.speed : DEFAULT_SETTINGS.speed;
+				const refreshMs = REFRESH_OPTIONS.some((item) => item.ms === parsed?.refreshMs) ? parsed.refreshMs : DEFAULT_SETTINGS.refreshMs;
+				return { theme, speed, refreshMs };
+			} catch {
+				return { ...DEFAULT_SETTINGS };
+			}
+		}
+		/** 持久化面板设置。 */
+		function saveSettings(settings) {
+			try {
+				if (typeof localStorage === "undefined") return;
+				localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+			} catch {
+				/* 忽略配额/隐私模式异常 */
+			}
+		}
 		/** 用量记录最多保留的小时条数（图表只取最近 24 条，留余量）。 */
 		const HOURS_MAX = 48;
 		/** 一小时毫秒数。 */
@@ -86,6 +167,32 @@ window.__ModuleLoader__.load({
 			return trimmed;
 		}
 		/**
+		 * 生成 24 小时演示数据：从当前余额向前回推，白天活跃、深夜低消耗，
+		 * 单调递减（无充值），带 demo 标记供图表注明。
+		 * @param {number} total - 当前总余额。
+		 * @param {number} nowMs - 当前时间（毫秒）。
+		 * @returns {Array<{ts: number, start: number, end: number, demo: boolean}>}
+		 */
+		function buildDemoHours(total, nowMs) {
+			const hourTs = Math.floor(nowMs / HOUR_MS) * HOUR_MS;
+			let seed = 7;
+			const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+			const rows = [];
+			let end = total;
+			for (let i = 23; i >= 0; i -= 1) {
+				const ts = hourTs - (23 - i) * HOUR_MS;
+				const hour = new Date(ts).getHours();
+				let spend = (hour >= 0 && hour < 7)
+					? (rnd() < 0.3 ? 0 : 0.02 + rnd() * 0.10)
+					: 0.05 + rnd() * 1.20;
+				spend = Math.round(spend * 100) / 100;
+				const start = Math.round((end + spend) * 100) / 100;
+				rows.push({ ts, start, end, demo: true });
+				end = start;
+			}
+			return rows;
+		}
+		/**
 		 * 波浪路径：viewBox 240×12，两个正弦周期（每 120 一个），
 		 * 波面在 y=3（峰）与 y=9（谷）之间小幅起伏，下部填满——
 		 * 配合 width:200% 与 translateX(-50%) 循环实现无缝流动。
@@ -119,7 +226,11 @@ window.__ModuleLoader__.load({
 		 * 首尾同色形成闭环；整体做"快吸慢呼"呼吸。
 		 * @returns {ReturnType<typeof jsxRuntime.jsxs>} 波浪层 JSX。
 		 */
-		function renderWaves() {
+		function renderWaves(theme) {
+			const stopsOf = (id, colors) => colors.map((color, index) => jsxRuntime.jsx("stop", {
+				offset: String(index / (colors.length - 1)),
+				stopColor: color
+			}, `${id}-${index}`));
 			return jsxRuntime.jsxs("span", {
 				className: "dsb_waves",
 				children: [
@@ -136,13 +247,7 @@ window.__ModuleLoader__.load({
 											id: "dsb-grad-back",
 											x1: "0",
 											x2: "1",
-											children: [
-												jsxRuntime.jsx("stop", { offset: "0", stopColor: "hsl(216,72%,58%)" }),
-												jsxRuntime.jsx("stop", { offset: "0.25", stopColor: "hsl(196,68%,52%)" }),
-												jsxRuntime.jsx("stop", { offset: "0.5", stopColor: "hsl(176,62%,48%)" }),
-												jsxRuntime.jsx("stop", { offset: "0.75", stopColor: "hsl(158,58%,48%)" }),
-												jsxRuntime.jsx("stop", { offset: "1", stopColor: "hsl(216,72%,58%)" })
-											]
+											children: stopsOf("back", theme.back)
 										})
 									]
 								}),
@@ -163,13 +268,7 @@ window.__ModuleLoader__.load({
 											id: "dsb-grad-front",
 											x1: "0",
 											x2: "1",
-											children: [
-												jsxRuntime.jsx("stop", { offset: "0", stopColor: "hsl(232,70%,64%)" }),
-												jsxRuntime.jsx("stop", { offset: "0.25", stopColor: "hsl(214,68%,60%)" }),
-												jsxRuntime.jsx("stop", { offset: "0.5", stopColor: "hsl(252,65%,62%)" }),
-												jsxRuntime.jsx("stop", { offset: "0.75", stopColor: "hsl(278,62%,60%)" }),
-												jsxRuntime.jsx("stop", { offset: "1", stopColor: "hsl(232,70%,64%)" })
-											]
+											children: stopsOf("front", theme.front)
 										})
 									]
 								}),
@@ -193,9 +292,20 @@ window.__ModuleLoader__.load({
 			const [state, setState] = react.useState({ status: "loading", data: null, error: null, at: 0 });
 			const [open, setOpen] = react.useState(false);
 			const [hours, setHours] = react.useState(() => loadHours());
+			const [settings, setSettings] = react.useState(() => loadSettings());
+			const [settingsOpen, setSettingsOpen] = react.useState(false);
+			const seededRef = react.useRef(false);
 			const inflight = react.useRef(null);
 			const panelRef = react.useRef(null);
 			const badgeRef = react.useRef(null);
+			/** 更新设置并持久化。 */
+			const updateSettings = react.useCallback((patch) => {
+				setSettings((prev) => {
+					const next = { ...prev, ...patch };
+					saveSettings(next);
+					return next;
+				});
+			}, []);
 			const load = react.useCallback(() => {
 				if (inflight.current !== null) inflight.current();
 				let cancelled = false;
@@ -223,11 +333,11 @@ window.__ModuleLoader__.load({
 			// 挂载即查询；卸载时取消在途请求。
 			react.useEffect(() => load(), [load]);
 			react.useEffect(() => () => { if (inflight.current !== null) inflight.current(); }, []);
-			// 每 10 秒自动刷新。
+			// 按设置的频率自动刷新（设置面板可切 10/30/60 秒）。
 			react.useEffect(() => {
-				const timer = setInterval(load, AUTO_REFRESH_MS);
+				const timer = setInterval(load, settings.refreshMs);
 				return () => clearInterval(timer);
-			}, [load]);
+			}, [load, settings.refreshMs]);
 			// 页面从后台切回可见时立即刷新。
 			react.useEffect(() => {
 				const onVisible = () => { if (document.visibilityState === "visible") load(); };
@@ -274,11 +384,34 @@ window.__ModuleLoader__.load({
 			todayStart.setHours(0, 0, 0, 0);
 			const todayTotal = columns.reduce((sum, col) => (col.ts >= todayStart.getTime() ? sum + col.consumed : sum), 0);
 			const hourLabel = (ts, current) => (current ? "现在" : `${new Date(ts).getHours()}时`);
+			// 当前主题与速度档；CSS 变量驱动波浪/呼吸时长（面板与 badge 同属一个 DOM 子树，自动继承）。
+			const theme = THEMES[settings.theme] ?? THEMES.ocean;
+			const speed = SPEEDS[settings.speed] ?? SPEEDS.normal;
+			const cssVars = {
+				"--dsb-waveBack-dur": `${speed.waveBack}s`,
+				"--dsb-waveFront-dur": `${speed.waveFront}s`,
+				"--dsb-breathe-dur": `${speed.breathe}s`
+			};
+			// 首次运行且无任何历史记录时，自动播种 24 小时演示数据（便于立刻查看图表效果）。
+			react.useEffect(() => {
+				if (seededRef.current) return;
+				if (loadHours().length > 0 || !SEED_DEMO_ON_FIRST_RUN) {
+					seededRef.current = true;
+					return;
+				}
+				if (!Number.isFinite(total)) return;
+				seededRef.current = true;
+				const rows = buildDemoHours(total, Date.now());
+				saveHours(rows);
+				setHours(rows);
+			}, [total]);
+			const hasDemoRows = hours.some((item) => item.demo === true);
 			const badgeMoney = hasMoney ? `${symbol}${formatMoney(total)}` : (state.status === "error" ? "查询失败" : "…");
 			const badgeTitle = hasMoney ? `DeepSeek 余额：${symbol}${formatMoney(total)}` : "DeepSeek 余额";
 			const barIdle = state.status === "error";
 			return jsxRuntime.jsxs("div", {
 				className: wide ? "dsb_layer" : "dsb_layer dsb_rail",
+				style: cssVars,
 				children: [
 					open && jsxRuntime.jsxs("section", {
 						className: "dsb_panel",
@@ -290,6 +423,16 @@ window.__ModuleLoader__.load({
 								className: "dsb_header",
 								children: [
 									jsxRuntime.jsx("span", { className: "dsb_title", children: "DeepSeek 余额" }),
+									jsxRuntime.jsx("button", {
+										type: "button",
+										className: "dsb_gear",
+										"data-on": settingsOpen || void 0,
+										"aria-label": "设置",
+										"aria-expanded": settingsOpen,
+										title: "设置",
+										onClick: () => setSettingsOpen((value) => !value),
+										children: "⚙"
+									}),
 									jsxRuntime.jsx("button", {
 										type: "button",
 										className: "dsb_refresh",
@@ -333,7 +476,7 @@ window.__ModuleLoader__.load({
 											jsxRuntime.jsx("div", {
 												className: "dsb_bar dsb_barBig",
 												"aria-hidden": true,
-												children: renderWaves()
+												children: renderWaves(theme)
 											}),
 											jsxRuntime.jsxs("ul", {
 												className: "dsb_rows",
@@ -363,7 +506,10 @@ window.__ModuleLoader__.load({
 																	? jsxRuntime.jsx("div", {
 																		className: "dsb_colFill",
 																		"data-current": col.current || void 0,
-																		style: { height: `${pct}%` }
+																		style: {
+																			height: `${pct}%`,
+																			background: `linear-gradient(180deg, ${(col.current ? theme.colCurrent : theme.col).join(",")})`
+																		}
 																	})
 																	: jsxRuntime.jsx("div", { className: "dsb_colEmpty" })
 															}, col.ts);
@@ -381,7 +527,62 @@ window.__ModuleLoader__.load({
 													}),
 													jsxRuntime.jsx("p", {
 														className: "dsb_chartNote",
-														children: "官方接口无用量查询，按余额变化本地估算，数据自安装后积累"
+														children: hasDemoRows
+															? "图表含演示数据，将随真实采样自然覆盖"
+															: "官方接口无用量查询，按余额变化本地估算，数据自安装后积累"
+													})
+												]
+											}),
+											settingsOpen && jsxRuntime.jsxs("div", {
+												className: "dsb_settings",
+												children: [
+													jsxRuntime.jsxs("div", {
+														className: "dsb_setRow",
+														children: [
+															jsxRuntime.jsx("span", { className: "dsb_setLabel", children: "颜色" }),
+															jsxRuntime.jsx("div", {
+																className: "dsb_setChips",
+																children: Object.entries(THEMES).map(([key, item]) => jsxRuntime.jsx("button", {
+																	type: "button",
+																	className: "dsb_setChip",
+																	"data-on": settings.theme === key || void 0,
+																	onClick: () => updateSettings({ theme: key }),
+																	children: item.name
+																}, key))
+															})
+														]
+													}),
+													jsxRuntime.jsxs("div", {
+														className: "dsb_setRow",
+														children: [
+															jsxRuntime.jsx("span", { className: "dsb_setLabel", children: "动画速度" }),
+															jsxRuntime.jsx("div", {
+																className: "dsb_setChips",
+																children: Object.entries(SPEEDS).map(([key, item]) => jsxRuntime.jsx("button", {
+																	type: "button",
+																	className: "dsb_setChip",
+																	"data-on": settings.speed === key || void 0,
+																	onClick: () => updateSettings({ speed: key }),
+																	children: item.label
+																}, key))
+															})
+														]
+													}),
+													jsxRuntime.jsxs("div", {
+														className: "dsb_setRow",
+														children: [
+															jsxRuntime.jsx("span", { className: "dsb_setLabel", children: "余额刷新" }),
+															jsxRuntime.jsx("div", {
+																className: "dsb_setChips",
+																children: REFRESH_OPTIONS.map((item) => jsxRuntime.jsx("button", {
+																	type: "button",
+																	className: "dsb_setChip",
+																	"data-on": settings.refreshMs === item.ms || void 0,
+																	onClick: () => updateSettings({ refreshMs: item.ms }),
+																	children: item.label
+																}, item.label))
+															})
+														]
 													})
 												]
 											}),
@@ -392,7 +593,7 @@ window.__ModuleLoader__.load({
 										className: "dsb_note",
 										children: [
 											`更新时间 ${new Date(state.at).toLocaleTimeString("zh-CN")}`,
-											" · 每 10 秒自动更新"
+											` · 每 ${Math.round(settings.refreshMs / 1000)} 秒自动更新`
 										]
 									})
 								]
@@ -411,7 +612,12 @@ window.__ModuleLoader__.load({
 						ref: badgeRef,
 						onClick: () => setOpen((value) => !value),
 						children: [
-							wide && jsxRuntime.jsx("span", { className: "dsb_icon", "aria-hidden": true, children: "¥" }),
+							wide && jsxRuntime.jsx("span", {
+								className: "dsb_icon",
+								"aria-hidden": true,
+								style: { background: `linear-gradient(135deg, ${theme.icon.join(",")})` },
+								children: "¥"
+							}),
 							wide && jsxRuntime.jsxs("span", {
 								className: "dsb_main",
 								children: [
@@ -428,14 +634,14 @@ window.__ModuleLoader__.load({
 									jsxRuntime.jsx("span", {
 										className: "dsb_bar",
 										"aria-hidden": true,
-										children: barIdle ? null : renderWaves()
+										children: barIdle ? null : renderWaves(theme)
 									})
 								]
 							}),
 							!wide && jsxRuntime.jsx("span", {
 								className: "dsb_railWaves",
 								"aria-hidden": true,
-								children: barIdle ? null : renderWaves()
+								children: barIdle ? null : renderWaves(theme)
 							}),
 							!wide && jsxRuntime.jsx("span", {
 								className: "dsb_railAmount",

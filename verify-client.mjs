@@ -75,4 +75,7 @@ for (const wide of [true, false]) {
 for (const marker of ["dsb_chartWrap", "dsb_chartAxis", "dsb_colFill", "dsb_colEmpty", "recordHour"]) {
   if (!bundleText.includes(marker)) throw new Error(`柱形图回归失败：bundle 缺少 ${marker}`);
 }
+for (const marker of ["dsb_settings", "dsb_setChip", "dsb_gear", "THEMES", "SPEEDS", "REFRESH_OPTIONS", "buildDemoHours", "SEED_DEMO_ON_FIRST_RUN"]) {
+  if (!bundleText.includes(marker)) throw new Error(`设置面板/演示数据回归失败：bundle 缺少 ${marker}`);
+}
 console.log("client bundle 验证通过");
