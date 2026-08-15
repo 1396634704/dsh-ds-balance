@@ -49,6 +49,20 @@ function isLoopbackHost(hostHeader) {
   );
 }
 
+/**
+ * 判断请求 Host 是否在 DSH 的浏览器信任列表内（webRuntime.trustedHosts）。
+ * DSH 以 `--host 0.0.0.0` 启动时会自动把本机全部局域网 IPv4 地址加入该列表，
+ * 插件端点与 DSH 的信任边界保持一致：LAN 设备访问 GUI 时余额/卸载端点同样放行。
+ * @param {string | undefined} hostHeader - 请求的 Host 头（可能带端口）。
+ * @param {string[] | undefined} trustedHosts - DSH webRuntime 提供的信任地址。
+ * @returns {boolean} 是否允许。
+ */
+function isTrustedLanHost(hostHeader, trustedHosts) {
+  if (hostHeader === undefined || !Array.isArray(trustedHosts) || trustedHosts.length === 0) return false;
+  const hostname = hostHeader.replace(/:\d+$/, "");
+  return trustedHosts.some((trusted) => trusted.replace(/:\d+$/, "") === hostname);
+}
+
 /** 合法 profile 名（防路径穿越）。 */
 const PROFILE_PATTERN = /^[A-Za-z0-9_-]+$/;
 
@@ -134,6 +148,14 @@ async function uninstallSelf(dshHome, profile) {
 
 /** @type {import("@deepseek-ai/cordis").Plugin} */
 function apply(ctx) {
+  // 可选获取 webRuntime（仅 web profile 提供）：拿到 DSH 的浏览器信任列表，
+  // 让局域网访问（--host 0.0.0.0）下的请求与 DSH 自身 fence 保持一致。
+  const webRuntime = ctx.get("webRuntime");
+  const hostAllowed = (hostHeader) => (
+    isLoopbackHost(hostHeader)
+    || isTrustedLanHost(hostHeader, webRuntime?.trustedHosts)
+  );
+
   const balanceRoute = ctx.webServer.register({
     kind: "exact",
     path: "/api/deepseek-balance",
@@ -143,8 +165,8 @@ function apply(ctx) {
         return;
       }
       // 只服务回环访问；LAN 直连场景如需放开，可在这里扩展白名单。
-      if (!isLoopbackHost(req.headers.host)) {
-        sendJson(res, 403, { error: "Forbidden: balance endpoint is loopback-only" });
+      if (!hostAllowed(req.headers.host)) {
+        sendJson(res, 403, { error: "Forbidden: balance endpoint is loopback/LAN-trusted-only" });
         return;
       }
       const credential = await ctx.credentials.resolve(CREDENTIAL_REF);
@@ -188,8 +210,8 @@ function apply(ctx) {
         sendJson(res, 405, { error: "Method not allowed" });
         return;
       }
-      if (!isLoopbackHost(req.headers.host)) {
-        sendJson(res, 403, { error: "Forbidden: uninstall endpoint is loopback-only" });
+      if (!hostAllowed(req.headers.host)) {
+        sendJson(res, 403, { error: "Forbidden: uninstall endpoint is loopback/LAN-trusted-only" });
         return;
       }
       // profile 经 query 传入（默认 web），只允许安全字符。
