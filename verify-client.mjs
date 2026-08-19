@@ -9,11 +9,19 @@ import { readFileSync, existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 
-// 优先从 web profile 锚点解析 react：profile 的 parent-walk 能到达 DSH 的
-// in-box 依赖平面（$DSH_HOME/profiles/node_modules）；找不到时退回脚本自身位置。
+// 优先从 web profile 锚点定位 react-dom，再以 react-dom 自身的包位置
+// 反向解析配套 react。npm 在 DSH rc.7 中可能同时安装 React 18/19；从两个
+// 不同依赖平面各取一个会导致 SSR 把合法元素误判为普通对象。
 const home = process.env.DSH_HOME ?? join(process.env.HOME ?? ".", ".dsh");
 const profileAnchor = join(home, "profiles", "web", "package.json");
-const require = createRequire(existsSync(profileAnchor) ? profileAnchor : import.meta.url);
+const profileRequire = createRequire(existsSync(profileAnchor) ? profileAnchor : import.meta.url);
+let require = profileRequire;
+try {
+  const reactDomManifest = profileRequire.resolve("react-dom/package.json");
+  require = createRequire(reactDomManifest);
+} catch {
+  // 缺少 react-dom 时保留原锚点，让下方 require 给出标准模块错误。
+}
 const bundlePath = new URL("client.js", import.meta.url);
 
 // 1. 模拟浏览器加载
